@@ -1,13 +1,9 @@
 package br.com.zupacademy.luanasavian.casadocodigo.controller;
 
 import br.com.zupacademy.luanasavian.casadocodigo.controller.request.AutorFormRequest;
-import br.com.zupacademy.luanasavian.casadocodigo.response.AutorDtoResponse;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Autor;
 import br.com.zupacademy.luanasavian.casadocodigo.repository.AutorRepository;
-import br.com.zupacademy.luanasavian.casadocodigo.validation.EmailUnicoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,15 +17,6 @@ public class AutorController {
 
     @Autowired
     private AutorRepository autorRepository;
-
-    @Autowired
-    private EmailUnicoValidator emailValidator;
-
-    @InitBinder
-    public void init(WebDataBinder binder) {
-
-        binder.addValidators(emailValidator);
-    }
 
     @PostMapping
     @Transactional //public ResponseEntity<AutorDtoResponse> retorna 201

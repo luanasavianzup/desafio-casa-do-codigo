@@ -3,9 +3,7 @@ package br.com.zupacademy.luanasavian.casadocodigo.controller;
 import br.com.zupacademy.luanasavian.casadocodigo.controller.request.CategoriaFormRequest;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Categoria;
 import br.com.zupacademy.luanasavian.casadocodigo.repository.CategoriaRepository;
-import br.com.zupacademy.luanasavian.casadocodigo.validation.NomeUnicoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -20,14 +18,6 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private NomeUnicoValidator nomeValidator;
-
-    @InitBinder
-    public void init(WebDataBinder binder) {
-
-        binder.addValidators(nomeValidator);
-    }
 
     @PostMapping
     @Transactional

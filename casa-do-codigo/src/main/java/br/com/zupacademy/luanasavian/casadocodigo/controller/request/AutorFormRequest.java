@@ -1,8 +1,8 @@
 package br.com.zupacademy.luanasavian.casadocodigo.controller.request;
 
+import br.com.zupacademy.luanasavian.casadocodigo.interfaces.UniqueValue;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Autor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -13,6 +13,7 @@ public class AutorFormRequest {
     private String nome;
     @NotBlank(message = "Insira o e-mail!")
     @Email
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
     @NotBlank(message = "Descrição obrigatória!")
     @Size(max = 400)
