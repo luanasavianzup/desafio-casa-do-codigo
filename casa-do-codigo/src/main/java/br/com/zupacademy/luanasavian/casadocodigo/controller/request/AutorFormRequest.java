@@ -12,7 +12,6 @@ public class AutorFormRequest {
     @NotBlank(message = "Nome obrigatório!")
     private String nome;
     @NotBlank(message = "Insira o e-mail!")
-    @Column(unique = true)
     @Email
     private String email;
     @NotBlank(message = "Descrição obrigatória!")
