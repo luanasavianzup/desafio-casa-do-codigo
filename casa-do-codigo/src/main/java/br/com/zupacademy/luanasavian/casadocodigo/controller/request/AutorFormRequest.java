@@ -26,10 +26,12 @@ public class AutorFormRequest {
     }
 
     public String getEmail() {
-        return email;
+
+        return this.email;
     }
 
     public Autor converter() {
+
         return new Autor(this.nome, this.email, this.descricao);
     }
 }

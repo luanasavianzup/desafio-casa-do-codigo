@@ -27,6 +27,7 @@ public class AutorController {
 
     @InitBinder
     public void init(WebDataBinder binder) {
+
         binder.addValidators(emailValidator);
     }
 

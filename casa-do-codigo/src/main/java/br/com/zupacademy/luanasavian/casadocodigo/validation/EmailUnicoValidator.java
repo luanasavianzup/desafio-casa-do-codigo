@@ -18,6 +18,7 @@ public class EmailUnicoValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
+
         return AutorFormRequest.class.isAssignableFrom(clazz);
     }
 
@@ -30,7 +31,7 @@ public class EmailUnicoValidator implements Validator {
         Optional<Autor> possivelAutor = autorRepository.findByEmail(form.getEmail());
 
         if(possivelAutor.isPresent()){
-            errors.rejectValue("email", null, "O e-mail: "+  form.getEmail() + " já existe em nossa base de dados!" );
+            errors.rejectValue("email", null, "O e-mail: " +  form.getEmail() + " já está presente em nossa base de dados!" );
         }
     }
 
