@@ -1,10 +1,10 @@
-package br.com.zupacademy.luanasavian.casadocodigo.dto;
+package br.com.zupacademy.luanasavian.casadocodigo.response;
 
 import br.com.zupacademy.luanasavian.casadocodigo.model.Autor;
 
 import java.time.LocalDateTime;
 
-public class AutorDto {
+public class AutorDtoResponse {
 
     private Long id;
     private String nome;
@@ -12,7 +12,7 @@ public class AutorDto {
     private String descricao;
     private LocalDateTime instanteCriacao;
 
-    public AutorDto(Autor autor) {
+    public AutorDtoResponse(Autor autor) {
         this.id = autor.getId();
         this.nome = autor.getNome();
         this.email = autor.getEmail();
