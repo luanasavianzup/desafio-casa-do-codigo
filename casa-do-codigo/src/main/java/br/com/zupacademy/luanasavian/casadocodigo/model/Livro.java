@@ -30,9 +30,9 @@ public class Livro {
     @NotNull
     private LocalDate dataPublicacao;
     @ManyToOne
-    private Categoria categoria;
+    private @NotNull @Valid Categoria categoria;
     @ManyToOne
-    private Autor autor;
+    private @NotNull @Valid Autor autor;
 
     @Deprecated
     public Livro() {

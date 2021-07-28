@@ -52,6 +52,6 @@ public class LivroController {
         Livro livro = form.toModel(entityManager);
         livroRepository.save(livro);
 
-        URI uri = uriBuilder.path("/livro/{id}").buildAndExpand(livro.getId()).toUri();
+        URI uri = uriBuilder.path("/livros/{id}").buildAndExpand(livro.getId()).toUri();
     }
 }

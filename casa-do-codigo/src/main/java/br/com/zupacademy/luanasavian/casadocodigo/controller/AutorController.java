@@ -24,7 +24,7 @@ public class AutorController {
         Autor autor = form.converter();
         autorRepository.save(autor);
 
-        URI uri = uriBuilder.path("/autor/{id}").buildAndExpand(autor.getId()).toUri();
+        URI uri = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
        //return ResponseEntity.created(uri).body(new AutorDtoResponse(autor));
     }
 }

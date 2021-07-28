@@ -10,27 +10,32 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
-    @PersistenceContext
-    EntityManager manager;
-    private Class<?> klass;
+public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object>{
+
     private String domainAttribute;
+    private Class<?> klass;
+    @PersistenceContext
+    private EntityManager manager;
 
     @Override
     public void initialize(ExistsId params) {
-        klass = params.domainClass();
         domainAttribute = params.fieldName();
+        klass = params.domainClass();
     }
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        String sql = String.format("select 1 from %s where %s = :id", klass.getName(), domainAttribute);
-        Query query = manager.createQuery(sql);
-        query.setParameter("id", value);
+        if(value == null) {
+            return true;
+        }
+
+        Query query = manager.createQuery("select 1 from "+klass.getName()+" where "+domainAttribute+"=:value");
+        query.setParameter("value", value);
+
+
         List<?> list = query.getResultList();
+        Assert.isTrue(list.size() <=1, "Foi encontrado mais de um " + klass + "com o atributo" + domainAttribute + " = " + value);
 
-        Assert.state(list.size() <= 1, "Foi encontrado mais de um " + klass + "com o atributo" + domainAttribute + " = " + value);
-
-        return list.size() == 1;
+        return !list.isEmpty();
     }
 }
