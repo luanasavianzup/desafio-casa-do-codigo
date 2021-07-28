@@ -1,6 +1,7 @@
 package br.com.zupacademy.luanasavian.casadocodigo.controller.request;
 
 import br.com.zupacademy.luanasavian.casadocodigo.interfaces.ExistsId;
+import br.com.zupacademy.luanasavian.casadocodigo.interfaces.UniqueState;
 import br.com.zupacademy.luanasavian.casadocodigo.interfaces.UniqueValue;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Estado;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Pais;
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class EstadoFormRequest {
 
     @NotBlank
-    @UniqueValue(domainClass = Pais.class, fieldName = "nome")
+    @UniqueState(estadoField = "nome", paisIdField = "paisId", domainClass = Estado.class)
     private String nome;
     @NotNull
     @ExistsId(domainClass = Pais.class, fieldName = "id")
