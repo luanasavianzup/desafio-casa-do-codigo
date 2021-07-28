@@ -1,6 +1,6 @@
 package br.com.zupacademy.luanasavian.casadocodigo.validation;
 
-import br.com.zupacademy.luanasavian.casadocodigo.interfaces.UniqueValue;
+import br.com.zupacademy.luanasavian.casadocodigo.interfaces.ExistsId;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -10,26 +10,27 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Object> {
-
+public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
     @PersistenceContext
-    private EntityManager manager;
-    private String domainAttribute;
+    EntityManager manager;
     private Class<?> klass;
+    private String domainAttribute;
 
     @Override
-    public void initialize(UniqueValue params) {
-        domainAttribute = params.fieldName();
+    public void initialize(ExistsId params) {
         klass = params.domainClass();
+        domainAttribute = params.fieldName();
     }
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        Query query = manager.createQuery("select 1 from " + klass.getName() + " where " + domainAttribute + "=:value");
-        query.setParameter("value", value);
+        String sql = String.format("select 1 from %s where %s = :id", klass.getName(), domainAttribute);
+        Query query = manager.createQuery(sql);
+        query.setParameter("id", value);
         List<?> list = query.getResultList();
+
         Assert.state(list.size() <= 1, "Foi encontrado mais de um " + klass + "com o atributo" + domainAttribute + " = " + value);
 
-        return list.isEmpty();
+        return list.size() == 1;
     }
 }

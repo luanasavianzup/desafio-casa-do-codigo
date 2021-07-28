@@ -1,6 +1,7 @@
 package br.com.zupacademy.luanasavian.casadocodigo.controller.request;
 
 
+import br.com.zupacademy.luanasavian.casadocodigo.interfaces.ExistsId;
 import br.com.zupacademy.luanasavian.casadocodigo.interfaces.UniqueValue;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Autor;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Categoria;
@@ -11,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class LivroFormRequest {
 
@@ -37,8 +37,10 @@ public class LivroFormRequest {
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataPublicacao;
     @NotNull
+    @ExistsId(domainClass = Autor.class, fieldName = "id")
     private Long categoriaId;
     @NotNull
+    @ExistsId(domainClass = Autor.class, fieldName = "id")
     private Long autorId;
 
     @Deprecated
