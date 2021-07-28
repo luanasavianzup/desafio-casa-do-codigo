@@ -13,12 +13,12 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Nome obrigatório!")
+    @NotBlank
     private String nome;
-    @NotBlank(message = "Insira o e-mail!")
+    @NotBlank
     @Email
     private String email;
-    @NotBlank(message = "Descrição obrigatória!")
+    @NotBlank
     @Size(max = 400)
     private String descricao;
     private LocalDateTime instanteCriacao = LocalDateTime.now();

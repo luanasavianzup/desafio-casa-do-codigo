@@ -9,13 +9,13 @@ import javax.validation.constraints.Size;
 
 public class AutorFormRequest {
 
-    @NotBlank(message = "Nome obrigatório!")
+    @NotBlank
     private String nome;
-    @NotBlank(message = "Insira o e-mail!")
+    @NotBlank
     @Email
     @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
-    @NotBlank(message = "Descrição obrigatória!")
+    @NotBlank
     @Size(max = 400)
     private String descricao;
 

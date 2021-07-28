@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 public class CategoriaFormRequest {
 
-    @NotBlank(message = "Nome obrigatório!")
+    @NotBlank
     @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
