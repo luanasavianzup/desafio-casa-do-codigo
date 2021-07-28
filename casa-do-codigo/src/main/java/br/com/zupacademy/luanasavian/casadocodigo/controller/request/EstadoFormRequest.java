@@ -10,10 +10,10 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@UniqueState
 public class EstadoFormRequest {
 
     @NotBlank
-    @UniqueState(estadoField = "nome", paisIdField = "paisId", domainClass = Estado.class)
     private String nome;
     @NotNull
     @ExistsId(domainClass = Pais.class, fieldName = "id")

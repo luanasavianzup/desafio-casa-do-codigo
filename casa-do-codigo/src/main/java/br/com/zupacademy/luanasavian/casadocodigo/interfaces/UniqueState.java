@@ -9,11 +9,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
 @Constraint(validatedBy = {UniqueStateValidator.class})
-@Target({ FIELD})
+@Target({ TYPE})
 @Retention(RUNTIME)
 public @interface UniqueState {
 
@@ -21,10 +22,6 @@ public @interface UniqueState {
 
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
-
-    String estadoField();
-    String paisIdField();
-    Class<?> domainClass();
 
 }
 
