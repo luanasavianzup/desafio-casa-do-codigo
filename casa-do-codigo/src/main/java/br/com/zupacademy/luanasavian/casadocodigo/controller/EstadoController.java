@@ -34,4 +34,7 @@ public class EstadoController {
 
         URI uri = uriBuilder.path("/estados/{id}").buildAndExpand(estado.getId()).toUri();
     }
+
+    public static class ClienteController {
+    }
 }

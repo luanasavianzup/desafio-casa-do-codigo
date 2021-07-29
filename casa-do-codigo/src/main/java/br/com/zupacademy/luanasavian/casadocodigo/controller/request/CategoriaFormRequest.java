@@ -19,7 +19,7 @@ public class CategoriaFormRequest {
     public CategoriaFormRequest() {
     }
 
-    public Categoria converter() {
+    public Categoria toModel() {
 
         return new Categoria(this.nome);
     }

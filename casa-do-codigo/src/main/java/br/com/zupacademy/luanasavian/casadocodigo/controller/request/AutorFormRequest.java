@@ -30,7 +30,7 @@ public class AutorFormRequest {
         return this.email;
     }
 
-    public Autor converter() {
+    public Autor toModel() {
 
         return new Autor(this.nome, this.email, this.descricao);
     }

@@ -21,7 +21,7 @@ public class AutorController {
     @PostMapping
     @Transactional //public ResponseEntity<AutorDtoResponse> retorna 201
     public void post(@RequestBody @Valid AutorFormRequest form, UriComponentsBuilder uriBuilder) {
-        Autor autor = form.converter();
+        Autor autor = form.toModel();
         autorRepository.save(autor);
 
         URI uri = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();

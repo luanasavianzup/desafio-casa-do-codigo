@@ -18,11 +18,10 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-
     @PostMapping
     @Transactional
     public void post(@RequestBody @Valid CategoriaFormRequest form, UriComponentsBuilder uriBuilder) {
-        Categoria categoria = form.converter();
+        Categoria categoria = form.toModel();
         categoriaRepository.save(categoria);
 
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
