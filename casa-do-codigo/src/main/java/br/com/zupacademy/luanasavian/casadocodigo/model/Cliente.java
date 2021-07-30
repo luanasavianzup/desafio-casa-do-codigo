@@ -55,6 +55,9 @@ public class Cliente {
     }
 
     public void setEstado(@NotNull @Valid Estado estado) {
+        if (!estado.pertenceAPais(pais)) {
+            throw new EntityNotFoundException("Estado não encontrado");
+        }
         this.estado = estado;
     }
 

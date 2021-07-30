@@ -8,6 +8,7 @@ import br.com.zupacademy.luanasavian.casadocodigo.model.Estado;
 import br.com.zupacademy.luanasavian.casadocodigo.model.Pais;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -59,19 +60,6 @@ public class ClienteFormRequest {
         this.cep = cep;
     }
 
-    public Cliente toModel(EntityManager manager) {
-
-        Pais pais = manager.find(Pais.class, paisId);
-
-        Cliente cliente = new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, telefone, cep);
-
-        if (estadoId!= null) {
-            cliente.setEstado(manager.find(Estado.class, estadoId));
-        }
-
-        return cliente;
-    }
-
     public Long getPaisId() {
         return paisId;
     }
@@ -80,4 +68,24 @@ public class ClienteFormRequest {
         return estadoId;
     }
 
+    public Cliente toModel(EntityManager manager) {
+        Pais pais = manager.find(Pais.class, paisId);
+
+        Estado estado = null;
+
+        if (estadoId != null){
+            estado = manager.find(Estado.class, this.estadoId);
+
+            if (estado == null){
+                throw new EntityNotFoundException("Estado não encontrado");
+            }
+            Cliente cliente = new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, telefone, cep);
+            cliente.setEstado(estado);
+            return cliente;
+        }
+
+        Cliente cliente = new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, telefone, cep);
+
+        return cliente;
+    }
 }
